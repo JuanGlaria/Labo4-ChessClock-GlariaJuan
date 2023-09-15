@@ -6,7 +6,9 @@ function App() {
 
   return (
     <>
-      <ClocksChess></ClocksChess>
+      <ClocksChess>
+      
+      </ClocksChess>
     </>
   )
 }
