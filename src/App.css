@@ -1,4 +1,9 @@
-.container{
+* {
+  font-family: system-ui;
+}
+
+
+.container {
   height: 100%;
   background-color: aqua;
   border: 1px solid yellow;
@@ -9,20 +14,64 @@
   justify-content: space-between;
 }
 
-.clockplayer{
+.clockplayer {
   width: 100%;
   height: 40%;
   background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.optionButtonGroup{
+.timer {
+  background-color: #891362;
+  color: #ffffff;
+}
+
+.clockplayer:first-child {
+  transform: rotate(180deg);
+}
+
+
+.optionButtonGroup {
   display: flex;
   justify-content: space-around;
 }
-.optionButtonGroup-botonOption{
+
+.optionButtonGroup-botonOption {
   border: none;
   width: 35px;
   height: 35px;
   border-radius: 2px;
   cursor: pointer;
 }
+
+
+@media (400px <= width <=600px) {
+  .container {
+    width: 600px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clockplayer {}
+
+  .optionButtonGroup {}
+
+  .optionButtonGroup-botonOption {}
+
+}
+
+/* 
+@media (min-width: 400px) and (max-width:600px) {
+  .container {}
+
+  .clockplayer {}
+
+  .optionButtonGroup {}
+
+  .optionButtonGroup-botonOption {}
+
+} */
