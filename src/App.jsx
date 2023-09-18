@@ -1,4 +1,4 @@
-import { Game } from './components/Game'
+import { Game } from './assets/Components/Game'
 import './App.css'
 function App() {
 
