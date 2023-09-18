@@ -1,16 +1,10 @@
-import { useState } from 'react'
+import { Game } from './components/Game'
 import './App.css'
-import { ClocksChess } from './assets/Components/ClocksChess'
 function App() {
-  // const Ref = useRef(null)
-
-  const [timer, setTimer] = useState('00:00')
 
   return (
     <>
-      <ClocksChess>
-
-      </ClocksChess>
+        <Game/>
     </>
   )
 }

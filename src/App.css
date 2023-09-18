@@ -1,77 +1,24 @@
-* {
-  font-family: system-ui;
+body {
+    background-color: #222222;
+    font-family: 'system-ui';
+    color: #ffffff;
+    height: 100vh;
+    width: 100vw;
+    display:grid;
+    place-content: center;
 }
 
-
-.container {
-  height: 100%;
-  background-color: aqua;
-  border: 1px solid yellow;
-  height: 600px;
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.clockplayer {
-  width: 100%;
-  height: 40%;
-  background-color: blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.timer {
-  background-color: #891362;
-  color: #ffffff;
-}
-
-.clockplayer:first-child {
-  transform: rotate(180deg);
-}
-
-
-.optionButtonGroup {
-  display: flex;
-  justify-content: space-around;
-}
-
-.optionButtonGroup-botonOption {
-  border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-
-@media (400px <= width <=600px) {
-  .container {
-    width: 600px;
-    height: 280px;
+.game {
+    height: 100vh;
+    width: 100vw;
+    padding: 0.5rem;
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
-  }
-
-  .clockplayer {}
-
-  .optionButtonGroup {}
-
-  .optionButtonGroup-botonOption {}
-
+    justify-content: space-between;
 }
-
-/* 
-@media (min-width: 400px) and (max-width:600px) {
-  .container {}
-
-  .clockplayer {}
-
-  .optionButtonGroup {}
-
-  .optionButtonGroup-botonOption {}
-
-} */
+.optionButtons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
