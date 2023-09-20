@@ -1,10 +1,11 @@
-import { Game } from './assets/Components/Game'
+// import { Game2 } from './assets/Components/Game2'
+import Game2 from './assets/Components/Game2'
 import './App.css'
 function App() {
 
   return (
     <>
-        <Game/>
+        <Game2/>
     </>
   )
 }
