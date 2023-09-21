@@ -1,11 +1,8 @@
 import './ClockPlayer.css'
 
 export const ClockPlayer = ({ timer, cambiarPlayer, player, isPlaying }) => {
-    console.log(timer)
-    console.log("playing => " + player + "=> " + cambiarPlayer)
-    console.log(isPlaying)
+    console.log(`player => ${player}, esta jugando => ${isPlaying}`)
     const formatoTiempo = (segundos) => {
-        console.log(segundos)
         const minutos = Math.floor(segundos / 60);
         const segundosRestantes = segundos % 60;
         return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;

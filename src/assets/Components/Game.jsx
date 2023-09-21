@@ -44,35 +44,34 @@ const Reloj2 = ({ tiempo, cambiarReloj }) => {
 export const Game = () => {
 
     //Estados
-    const [timerPlayer1, setTimerPlayer1] = useState(500)
-    const [timerPlayer2, setTimerPlayer2] = useState(500)
-    const [isPlaying, setIsPlaying] = useState(1)
+    const [timerPlayer1, setTimerPlayer1] = useState(0)
+    const [timerPlayer2, setTimerPlayer2] = useState(0)
+    const [timerGlobal, setTimerGlobal] = useState(0)
+    const [isPlaying, setIsPlaying] = useState('1')
     const [gameStart, setGameStart] = useState(false)
+    const [settingValue, setSettingValue] = useState(true)
 
     console.log(timerPlayer1, timerPlayer2)
     //Funciones
 
 
-   
-    //   useEffect(() => {
-    //     Swal.fire({
-    //         title: 'Bienvenido',
-    //         input: 'number',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Look up',
-    //         showLoaderOnConfirm: true,
-    //         preConfirm: (result) => {
-    //             console.log(result)
-    //         },
-    //         allowOutsideClick: () => !Swal.isLoading()
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire({
-    //                 text: 'Hola'
-    //             })
-    //         }
-    //     })
-    // }, [])
+
+    useEffect(() => {
+        Swal.fire({
+            title: 'Bienvenido',
+            input: 'number',
+            showCancelButton: true,
+            confirmButtonText: 'Look up',
+            showLoaderOnConfirm: true,
+            preConfirm: (result) => {
+                let timerAMinutos = result * 60
+                setTimerGlobal(timerAMinutos)
+                setTimerPlayer1(timerAMinutos)
+                setTimerPlayer2(timerAMinutos)
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        })
+    }, [settingValue])
 
     useEffect(() => {
         let intervalo
@@ -91,24 +90,32 @@ export const Game = () => {
                 clearInterval(intervalo)
             }
         }
-    }, [timerPlayer1, timerPlayer2])
+    }, [timerPlayer1, timerPlayer2, isPlaying, gameStart])
 
-    const startGame = () => {
-        setGameStart(true)
+    const setting = () => {
+        setSettingValue((prevSetting) => !prevSetting)
     }
-
+    const startGame = () => {
+        setGameStart((statusGame) => !statusGame)
+    }
+    const resetGame = () => {
+        setTimerPlayer1(timerGlobal)
+        setTimerPlayer2(timerGlobal)
+    }
     const cambiarPlayer = () => {
-        setIsPlaying((prevPlayer) => !prevPlayer)
-        console.log(isPlaying)
+        console.log(`QUIOEN ESTA JUGANDO => ${isPlaying}`)
+        if (isPlaying === 1) {
+            setIsPlaying((prevPlayer) => !prevPlayer)
+        }
     }
     return (
         <>
             <main className='game'>
                 <ClockPlayer timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player="1" isPlaying></ClockPlayer>
                 <div className="optionButtons">
-                    <button><i className="fa-solid fa-gear fa-xl"></i></button>
-                    <button onClick={startGame}><i className="fa-solid fa-play fa-xl"></i></button>
-                    <button><i className="fa-solid fa-rotate-right fa-xl"></i></button>
+                    <button onClick={setting}><i className="fa-solid fa-gear fa-xl"></i></button>
+                    <button onClick={startGame}>{gameStart ? <i className="fa-solid fa-pause fa-xl"></i> : <i className="fa-solid fa-play fa-xl"></i>}</button>
+                    <button onClick={resetGame}><i className="fa-solid fa-rotate-right fa-xl"></i></button>
                 </div>
                 <ClockPlayer timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player="2" isPlaying></ClockPlayer>
             </main>
