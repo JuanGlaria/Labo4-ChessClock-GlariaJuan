@@ -6,7 +6,7 @@ const Reloj = ({ tiempo }) => {
     const formatoTiempo = (segundos) => {
         const minutos = Math.floor(segundos / 60);
         const segundosRestantes = segundos % 60;
-        return `${ minutos }:${ segundosRestantes < 10 ? '0' : '' }${ segundosRestantes }`;
+        return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
     };
 
     return (
@@ -16,11 +16,11 @@ const Reloj = ({ tiempo }) => {
         </div>
     );
 };
-const Reloj2 = ({ tiempo,cambiarReloj }) => {
+const Reloj2 = ({ tiempo, cambiarReloj }) => {
     const formatoTiempo = (segundos) => {
         const minutos = Math.floor(segundos / 60);
         const segundosRestantes = segundos % 60;
-        return `${ minutos }:${ segundosRestantes < 10 ? '0' : '' }${ segundosRestantes }`;
+        return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
     };
 
     return (
@@ -54,9 +54,9 @@ const Game2 = () => {
         })
     }, [])
 
-    const [timerGlobal,setTimerGlobal] = useState(30000)
-    const [timer, setTimer] = useState(timerGlobal); 
-    const [timer2, setTimer2] = useState(timerGlobal); 
+    const [timerGlobal, setTimerGlobal] = useState(30000)
+    const [timer, setTimer] = useState(timerGlobal);
+    const [timer2, setTimer2] = useState(timerGlobal);
     const [relojActivo, setRelojActivo] = useState(false); // Indica cuál reloj está activo (1 o 2)
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const Game2 = () => {
             intervalId = setInterval(() => {
                 setTimer((prevTimer) => prevTimer - 1);
             }, 1000);
-        }else {
+        } else {
             intervalId = setInterval(() => {
                 setTimer2((prevTimer) => prevTimer - 1);
             }, 1000);
@@ -75,7 +75,7 @@ const Game2 = () => {
         return () => {
             clearInterval(intervalId);
         };
-    }, [timer,timer2]);
+    }, [timer, timer2]);
 
     const cambiarReloj = () => {
         // Cambia al otro reloj (1 a 2 o 2 a 1)
@@ -92,8 +92,10 @@ const Game2 = () => {
             <h1>Timer App</h1>
             <button onClick={cambiarReloj}>Cambiar Reloj</button>
             <button onClick={reiniciarReloj}>Reiniciar</button>
-             <div style={{display:'flex',gap:'10'}}><Reloj tiempo={timer} setTimer={setTimer} cambiarReloj={cambiarReloj}/> 
-             <Reloj2 tiempo={timer2} cambiarReloj={cambiarReloj} /></div>
+            <div style={{ display: 'flex', gap: '10' }}>
+                <Reloj tiempo={timer} setTimer={setTimer} cambiarReloj={cambiarReloj} />
+                <Reloj2 tiempo={timer2} cambiarReloj={cambiarReloj} />
+            </div>
         </div>
     );
 };
