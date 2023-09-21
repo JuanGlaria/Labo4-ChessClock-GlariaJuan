@@ -1,79 +1,119 @@
 /*ACA HACER TODAS LAS FUNCIONALIDADES*/
+import { ClockPlayer } from './ClockPlayer';
 import './ClockPlayer.css'
-import { useState, useEffect } from "react";
-// import { ClockPlayer } from "./ClockPlayer";
-// import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import Swal from 'sweetalert2';
 
-// const Reloj = ({ tiempo }) => {
-//   const formatoTiempo = (segundos) => {
-//     const minutos = Math.floor(segundos / 60);
-//     const segundosRestantes = segundos % 60;
-//     return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
-//   };
 
-//   return (
-//     <div>
-//       <h2>Reloj</h2>
-//       <p>Tiempo restante: {formatoTiempo(tiempo)}</p>
-//     </div>
-//   );
-// };
-// const Reloj2 = ({ tiempo, cambiarReloj }) => {
-//   const formatoTiempo = (segundos) => {
-//     const minutos = Math.floor(segundos / 60);
-//     const segundosRestantes = segundos % 60;
-//     return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
-//   };
 
-//   return (
-//     <div onClick={cambiarReloj}>
-//       <h2>Reloj 2 la gayastre</h2>
-//       <p>Tiempo restante: {formatoTiempo(tiempo)}</p>
-//     </div>
-//   );
-// };
+/*
+import { ClockPlayer } from "./ClockPlayer";
+import Swal from "sweetalert2";
+
+const Reloj = ({ tiempo }) => {
+  const formatoTiempo = (segundos) => {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
+  };
+
+  return (
+    <div>
+      <h2>Reloj</h2>
+      <p>Tiempo restante: {formatoTiempo(tiempo)}</p>
+    </div>
+  );
+};
+const Reloj2 = ({ tiempo, cambiarReloj }) => {
+  const formatoTiempo = (segundos) => {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
+  };
+
+  return (
+    <div onClick={cambiarReloj}>
+      <h2>Reloj 2 la gayastre</h2>
+      <p>Tiempo restante: {formatoTiempo(tiempo)}</p>
+    </div>
+  );
+};
+*/
 
 
 export const Game = () => {
-  const [timer, setTimer] = useState(0)
-  setTimer(500)
-  useEffect(() => {
-    setInterval(
-      setTimer((prevTimer) => {
-      prevTimer - 1
-    }),1000)
-    
-  }, [timer])
+
+    //Estados
+    const [timerPlayer1, setTimerPlayer1] = useState(500)
+    const [timerPlayer2, setTimerPlayer2] = useState(500)
+    const [isPlaying, setIsPlaying] = useState(1)
+    const [gameStart, setGameStart] = useState(false)
+
+    console.log(timerPlayer1, timerPlayer2)
+    //Funciones
 
 
+   
+    //   useEffect(() => {
+    //     Swal.fire({
+    //         title: 'Bienvenido',
+    //         input: 'number',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Look up',
+    //         showLoaderOnConfirm: true,
+    //         preConfirm: (result) => {
+    //             console.log(result)
+    //         },
+    //         allowOutsideClick: () => !Swal.isLoading()
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Swal.fire({
+    //                 text: 'Hola'
+    //             })
+    //         }
+    //     })
+    // }, [])
 
-  const ClockPlayer = ({ timer }) => {
-    // player, timer, cantMovimientos, isPlaying 
-    // let iconoPlayer = null
-    // if (player == 1) {
-    //     iconoPlayer = <i className="fa-solid fa-chess-queen fa-xl"></i>
-    // } else {
-    //     iconoPlayer = <i className="fa-solid fa-chess-queen fa-xl" style={{color: "#000000",}}></i>
-    // }
+    useEffect(() => {
+        let intervalo
+        console.log(gameStart)
+        if (gameStart === true) {
+            if (timerPlayer1 > 0 && isPlaying == 1) {
+                intervalo = setInterval(() => {
+                    setTimerPlayer1((prevTimerPlayer1) => prevTimerPlayer1 - 1)
+                }, 1000)
+            } else {
+                intervalo = setInterval(() => {
+                    setTimerPlayer2((prevTimerPlayer2) => prevTimerPlayer2 - 1)
+                }, 1000)
+            }
+            return () => {
+                clearInterval(intervalo)
+            }
+        }
+    }, [timerPlayer1, timerPlayer2])
 
-    // return (
-    //     <div className="clockPlayer" style={{backgroundColor: isPlaying ? '#7AFF33' : '#3f3f3f'}} >
-    //             <p>{timer}</p>
-    //             <span>Movimientos: {cantMovimientos}</span>
-    //         {iconoPlayer}
-    //     </div>
-    // )
-    <div>
-      <p>{timer}</p>
-    </div>
-}
+    const startGame = () => {
+        setGameStart(true)
+    }
 
-  return(
-    <>
-      <ClockPlayer timer={timer}></ClockPlayer>
-      <ClockPlayer></ClockPlayer>
-    </>
-  )
+    const cambiarPlayer = () => {
+        setIsPlaying((prevPlayer) => !prevPlayer)
+        console.log(isPlaying)
+    }
+    return (
+        <>
+            <main className='game'>
+                <ClockPlayer timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player="1" isPlaying></ClockPlayer>
+                <div className="optionButtons">
+                    <button><i className="fa-solid fa-gear fa-xl"></i></button>
+                    <button onClick={startGame}><i className="fa-solid fa-play fa-xl"></i></button>
+                    <button><i className="fa-solid fa-rotate-right fa-xl"></i></button>
+                </div>
+                <ClockPlayer timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player="2" isPlaying></ClockPlayer>
+            </main>
+        </>
+    )
 };
 
 

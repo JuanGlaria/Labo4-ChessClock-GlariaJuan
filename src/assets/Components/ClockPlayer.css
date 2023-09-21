@@ -7,21 +7,23 @@
     border-radius: 0px 0px 10px 10px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    user-select: none;
 }
-.clockPlayer-elements{
-    display:flex;
+
+.clockPlayer-elements {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.clockPlayer > span{
+.clockPlayer>span {
     position: absolute;
     bottom: 5%;
 }
 
-.clockPlayer > p{
+.clockPlayer>p {
     font-size: 3rem;
-    letter-spacing: 0.15rem;
     user-select: none;
 }
 
@@ -29,7 +31,7 @@
     transform: rotate(180deg);
 }
 
-.clockPlayer > i {
+.clockPlayer>i {
     position: absolute;
     right: 4%;
     bottom: 10%;
