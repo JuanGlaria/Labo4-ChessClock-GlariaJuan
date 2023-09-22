@@ -9,7 +9,6 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
     const habilitarValorIncremento = () => {
         
         let inputValorIncremento = document.getElementById('valorAumento')
-        console.log(inputValorIncremento.disabled)
         if (inputValorIncremento.disabled === true) {
             inputValorIncremento.disabled = false
         } else {
@@ -38,6 +37,20 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
     }
 
     function Validar(timeGameValue, valorIncrementValue) {
+        let regexPattern = /^-?[0-9]+$/;
+        let result = regexPattern.test(timeGameValue)
+
+        if(!result){
+            return (
+                {
+                    status: false,
+                    type: 'error',
+                    icon: 'error',
+                    title: 'Error!',
+                    text: '¡Ingrese un valor entero positivo en tiempo de partida, inténtalo nuevamente!',
+                }
+            )
+        }
         if (timeGameValue <= 0) {
             return (
                 {
