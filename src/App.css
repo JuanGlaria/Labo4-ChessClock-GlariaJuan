@@ -26,11 +26,18 @@ body {
 }
 
 .optionButtons > button{
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   background: none;
   border: none;
-  color: #ffffff;
+  color: #3f3f3f;
+  border-radius: 50%;
   cursor: pointer;
+  background-color: #bbff22;
+}
 
+.optionButtons > button:hover{
+  color: white;
+  background-color: black;
+  transition: background-color 0.1s;
 }
