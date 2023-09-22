@@ -4,7 +4,8 @@ import { ClockPlayer1, ClockPlayer2 } from './ClockPlayer';
 import { useEffect, useState } from "react";
 import { useModal } from './useModal';
 import Swal from 'sweetalert2';
-import { Modal } from './modal';
+import { Modal } from './Modal'
+
 
 
 
