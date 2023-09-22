@@ -21,7 +21,6 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
         let valorIncrementValue = document.getElementById('valorAumento').value
         let conIncrementoValue = document.getElementById('partidaConIncremento').value
         
-        console.log(`Modal conIncremetno =>  ${conIncrementoValue}`)
         let respuesta = Validar(timeGameValue, valorIncrementValue)
         if (respuesta.status === false) {
             Swal.fire({
@@ -38,11 +37,8 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
     }
 
     function Validar(timeGameValue, valorIncrementValue) {
-        
         let regexPattern = /^-?[0-9]+$/;
         let result = regexPattern.test(timeGameValue)
-        console.log('validar regex ' + result)
-
 
         if(!result){
             return (

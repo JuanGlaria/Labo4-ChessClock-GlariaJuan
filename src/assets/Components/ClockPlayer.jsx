@@ -1,7 +1,7 @@
 import './ClockPlayer.css'
 
 export const ClockPlayer1 = ({ timer, cambiarPlayer, cantMovimientoPlayer1 }) => {
-    console.log('timer del componente ' + timer)
+ 
     const formatoTiempo = (segundos) => {
         const minutos = Math.floor(segundos / 60);
         const segundosRestantes = segundos % 60;
