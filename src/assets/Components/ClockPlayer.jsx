@@ -1,7 +1,6 @@
 import './ClockPlayer.css'
 
-export const ClockPlayer = ({ timer, cambiarPlayer, player, isPlaying }) => {
-    console.log(`player => ${player}, esta jugando => ${isPlaying}`)
+export const ClockPlayer = ({ timer, cambiarPlayer, player, cantMovimientoPlayer }) => {
     const formatoTiempo = (segundos) => {
         const minutos = Math.floor(segundos / 60);
         const segundosRestantes = segundos % 60;
@@ -17,9 +16,9 @@ export const ClockPlayer = ({ timer, cambiarPlayer, player, isPlaying }) => {
     }
 
     return (
-        <div className="clockPlayer" onClick={cambiarPlayer} style={{background: isPlaying ? '#3f3f3f' : '#FFBF33'}}>
+        <div className="clockPlayer" onClick={cambiarPlayer}>
             <p>{formatoTiempo(timer)}</p>
-            <span>Movimientos: 0</span>
+            <span>Movimientos: {cantMovimientoPlayer}</span>
             {iconoPlayer}
         </div >
     );
