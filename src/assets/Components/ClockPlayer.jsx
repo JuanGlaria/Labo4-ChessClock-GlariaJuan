@@ -6,9 +6,7 @@ export const ClockPlayer = ({ timer, cambiarPlayer, player, cantMovimientoPlayer
         const segundosRestantes = segundos % 60;
         return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
     };
-
     let iconoPlayer = null
-
     if (player == 1) {
         iconoPlayer = <i className="fa-solid fa-chess-queen fa-xl"></i>
     } else {
@@ -16,7 +14,7 @@ export const ClockPlayer = ({ timer, cambiarPlayer, player, cantMovimientoPlayer
     }
 
     return (
-        <div className="clockPlayer" onClick={cambiarPlayer}>
+        <div className="clockPlayer" onClick={cambiarPlayer} >
             <p>{formatoTiempo(timer)}</p>
             <span>Movimientos: {cantMovimientoPlayer}</span>
             {iconoPlayer}

@@ -4,7 +4,7 @@ import { ClockPlayer } from './ClockPlayer';
 import { Modal } from './modal';
 import { useEffect, useState } from "react";
 import { useModal } from './useModal';
-import Swal from 'sweetalert2';
+
 
 
 
@@ -81,7 +81,7 @@ export const Game = () => {
 
     useEffect(() => {
         let intervalo
-        if (gameStart === true) {
+        if (gameStart === true && isPlaying != "") {
             if (timerPlayer1 > 0 && isPlaying == 1) {
                 intervalo = setInterval(() => {
                     setTimerPlayer1((prevTimerPlayer1) => prevTimerPlayer1 - 1)
@@ -110,7 +110,12 @@ export const Game = () => {
     }
 
     const startGame = () => {
+        if (timerPlayer1 == 0) {
+            setTimerPlayer1(10 * 60)
+            setTimerPlayer2(10 * 60)
+        }
         setGameStart((statusGame) => !statusGame)
+
     }
 
     const resetGame = () => {
@@ -123,14 +128,13 @@ export const Game = () => {
     }
 
     const cambiarPlayer = () => {
+        console.log(isPlaying)
         if (isPlaying === 1) {
             setIsPlaying(2)
             setCantMovimientoPlayer1(cantMovimientoPlayer1 + 1)
             if (conIncremento === 0) setTimerPlayer1(timerPlayer1 + valorIncrement)
-
         } else {
             setIsPlaying(1)
-            setTimerPlayer2(timerPlayer2 + valorIncrement)
             setCantMovimientoPlayer2(cantMovimientoPlayer2 + 1)
             if (conIncremento === 0) setTimerPlayer2(timerPlayer2 + valorIncrement)
         }
@@ -139,13 +143,13 @@ export const Game = () => {
         <>
             <Modal show={isShowing} onCloseButtonClick={toggle} timeGameSettings={timeGameSettings}></Modal>
             <main className='game'>
-                <ClockPlayer timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player={1} isPlaying={isPlaying} cantMovimientoPlayer={cantMovimientoPlayer1}></ClockPlayer>
+                <ClockPlayer timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player={1} cantMovimientoPlayer={cantMovimientoPlayer1} ></ClockPlayer>
                 <div className="optionButtons">
                     <button onClick={toggle}><i className="fa-solid fa-gear fa-xl"></i></button>
                     <button onClick={startGame}>{gameStart ? <i className="fa-solid fa-pause fa-xl"></i> : <i className="fa-solid fa-play fa-xl"></i>}</button>
                     <button onClick={resetGame}><i className="fa-solid fa-rotate-right fa-xl"></i></button>
                 </div>
-                <ClockPlayer timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player='2' isPlaying={isPlaying} cantMovimientoPlayer={cantMovimientoPlayer2}></ClockPlayer>
+                <ClockPlayer timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player={2} cantMovimientoPlayer={cantMovimientoPlayer2} ></ClockPlayer>
             </main>
         </>
     )
