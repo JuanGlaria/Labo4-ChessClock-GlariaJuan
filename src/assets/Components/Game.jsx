@@ -1,10 +1,11 @@
 /*ACA HACER TODAS LAS FUNCIONALIDADES*/
 import './ClockPlayer.css'
 import { ClockPlayer1, ClockPlayer2 } from './ClockPlayer';
-import { Modal } from './modal';
 import { useEffect, useState } from "react";
 import { useModal } from './useModal';
 import Swal from 'sweetalert2';
+import { Modal } from './modal';
+
 
 
 export const Game = () => {
