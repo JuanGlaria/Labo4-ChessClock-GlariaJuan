@@ -20,7 +20,7 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
         let timeGameValue = document.getElementById('timePartida').value
         let valorIncrementValue = document.getElementById('valorAumento').value
         let conIncrementoValue = document.getElementById('partidaConIncremento').value
-        
+
         let respuesta = Validar(timeGameValue, valorIncrementValue)
         if (respuesta.status === false) {
             Swal.fire({

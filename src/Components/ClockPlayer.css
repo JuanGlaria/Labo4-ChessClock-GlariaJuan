@@ -52,7 +52,6 @@
         cursor: pointer;
         user-select: none;
     }
-    
 
     .clockPlayer:first-child {
         transform: rotate(360deg);

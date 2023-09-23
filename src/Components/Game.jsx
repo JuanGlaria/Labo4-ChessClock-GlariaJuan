@@ -33,20 +33,16 @@ export const Game = () => {
                 intervalo = setInterval(() => {
                     setTimerPlayer1((prevTimerPlayer1) => prevTimerPlayer1 - 1)
                 }, 1000)
-                
             } else {
                 intervalo = setInterval(() => {
                     setTimerPlayer2((prevTimerPlayer2) => prevTimerPlayer2 - 1)
                 }, 1000)
-                
             }
             if (timerPlayer2 == 0) {
-                resetGame()
                 return (
                     Swal.fire({
-                        title: 'Sweet!',
-                        text: 'Modal with a custom image.',
-                        imageUrl: '../../../public/img/winnerBlancas.jpg',
+                        title: 'Ganador Blancos!',
+                        imageUrl: '/img/winnerBlancas.jpg',
                         imageWidth: 200,
                         imageHeight: 400,
                         imageAlt: 'Ganador Blancos',
@@ -54,12 +50,10 @@ export const Game = () => {
                 )
             }
             if (timerPlayer1 == 0) {
-                resetGame()
                 return (
                     Swal.fire({
-                        title: 'Sweet!',
-                        text: 'Modal with a custom image.',
-                        imageUrl: '../../../public/img/winnerNegras.jpg',
+                        title: 'Ganador Negras',
+                        imageUrl: '/img/winnerNegras.jpg',
                         imageWidth: 200,
                         imageHeight: 400,
                         imageAlt: 'Ganador Negras',
@@ -87,8 +81,6 @@ export const Game = () => {
             setTimerPlayer2(10 * 60)
         }
         setGameStart((gameStart) => !gameStart)
-
-
     }
 
     const resetGame = () => {
@@ -104,31 +96,35 @@ export const Game = () => {
         if (isPlaying === 1) {
             setIsPlaying(2)
             setCantMovimientoPlayer1(cantMovimientoPlayer1 + 1)
-            if (conIncremento === 'on') {
+            if (valorIncrement !== "") {
                 let parseValorIncrement = parseInt(valorIncrement)
                 setTimerPlayer1(timerPlayer1 + parseValorIncrement)
+            } else {
+                setTimerPlayer1(timerPlayer1 + 0)
             }
         } else {
             setIsPlaying(1)
             setCantMovimientoPlayer2(cantMovimientoPlayer2 + 1)
-            if (conIncremento === 'on') {
+            if (valorIncrement !== "") {
                 let parseValorIncrement = parseInt(valorIncrement)
                 setTimerPlayer2(timerPlayer2 + parseValorIncrement)
+            } else {
+                setTimerPlayer2(timerPlayer2 + 0)
             }
-
         }
     }
+
     return (
         <>
             <Modal show={isShowing} onCloseButtonClick={toggle} timeGameSettings={timeGameSettings}></Modal>
             <main className='game'>
-                <ClockPlayer1 timer={timerPlayer1} cambiarPlayer={cambiarPlayer} cantMovimientoPlayer1={cantMovimientoPlayer1} ></ClockPlayer1>
+                <ClockPlayer1 timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player={1} isPlaying={isPlaying} cantMovimientoPlayer1={cantMovimientoPlayer1} timerGlobal={timerGlobal}></ClockPlayer1>
                 <div className="optionButtons">
                     <button onClick={toggle}><i className="fa-solid fa-gear fa-xl"></i></button>
                     <button onClick={startGame}>{gameStart ? <i className="fa-solid fa-pause fa-xl"></i> : <i className="fa-solid fa-play fa-xl"></i>}</button>
                     <button onClick={resetGame}><i className="fa-solid fa-rotate-right fa-xl"></i></button>
                 </div>
-                <ClockPlayer2 timer={timerPlayer2} cambiarPlayer={cambiarPlayer} cantMovimientoPlayer2={cantMovimientoPlayer2} ></ClockPlayer2>
+                <ClockPlayer2 timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player={2} isPlaying={isPlaying} cantMovimientoPlayer2={cantMovimientoPlayer2} timerGlobal={timerGlobal}></ClockPlayer2>
             </main>
         </>
     )
