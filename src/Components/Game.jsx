@@ -40,24 +40,13 @@ export const Game = () => {
             }
             if (timerPlayer2 == 0) {
                 return (
-                    Swal.fire({
-                        title: 'Ganador Blancos!',
-                        imageUrl: '/img/winnerBlancas.jpg',
-                        imageWidth: 200,
-                        imageHeight: 400,
-                        imageAlt: 'Ganador Blancos',
-                    })
+                    Ganador('Blancas')
+
                 )
             }
             if (timerPlayer1 == 0) {
                 return (
-                    Swal.fire({
-                        title: 'Ganador Negras',
-                        imageUrl: '/img/winnerNegras.jpg',
-                        imageWidth: 200,
-                        imageHeight: 400,
-                        imageAlt: 'Ganador Negras',
-                    })
+                    Ganador('Negras')
                 )
             }
             return () => {
@@ -65,6 +54,29 @@ export const Game = () => {
             }
         }
     }, [timerPlayer1, timerPlayer2, gameStart])
+
+
+    const Ganador = (ganador) => {
+        if (ganador === 'Blancas') {
+            Swal.fire({
+                title: 'Ganador Blancos!',
+                imageUrl: '/img/winnerBlancas.jpg',
+                imageWidth: 200,
+                imageHeight: 400,
+                imageAlt: 'Ganador Blancos',
+            })
+            setGameStart(false)
+        } else {
+            Swal.fire({
+                title: 'Ganador Negras',
+                imageUrl: '/img/winnerNegras.jpg',
+                imageWidth: 200,
+                imageHeight: 400,
+                imageAlt: 'Ganador Negras',
+            })
+            setGameStart(false)
+        }
+    }
 
 
     const timeGameSettings = (timeGameValue, conIncrementoValue, valorIncrementValue) => {
@@ -81,6 +93,10 @@ export const Game = () => {
             setTimerPlayer2(10 * 60)
         }
         setGameStart((gameStart) => !gameStart)
+        console.log(gameStart);
+        if (cantMovimientoPlayer1 === 0) {
+            setCantMovimientoPlayer1(cantMovimientoPlayer1 + 1)
+        }
     }
 
     const resetGame = () => {
@@ -93,7 +109,7 @@ export const Game = () => {
     }
 
     const cambiarPlayer = () => {
-        if (isPlaying === 1) {
+        if (isPlaying === 1 && gameStart === true) {
             setIsPlaying(2)
             setCantMovimientoPlayer1(cantMovimientoPlayer1 + 1)
             if (valorIncrement !== "") {
@@ -102,7 +118,8 @@ export const Game = () => {
             } else {
                 setTimerPlayer1(timerPlayer1 + 0)
             }
-        } else {
+        }
+        if (isPlaying === 2 && gameStart === true) {
             setIsPlaying(1)
             setCantMovimientoPlayer2(cantMovimientoPlayer2 + 1)
             if (valorIncrement !== "") {
@@ -118,13 +135,27 @@ export const Game = () => {
         <>
             <Modal show={isShowing} onCloseButtonClick={toggle} timeGameSettings={timeGameSettings}></Modal>
             <main className='game'>
-                <ClockPlayer1 timer={timerPlayer1} cambiarPlayer={cambiarPlayer} player={1} isPlaying={isPlaying} cantMovimientoPlayer1={cantMovimientoPlayer1} timerGlobal={timerGlobal}></ClockPlayer1>
+                <ClockPlayer1
+                    timer={timerPlayer1}
+                    cambiarPlayer={cambiarPlayer}
+                    player={1}
+                    isPlaying={isPlaying}
+                    cantMovimientoPlayer1={cantMovimientoPlayer1}
+                    timerGlobal={timerGlobal}>
+                </ClockPlayer1>
                 <div className="optionButtons">
                     <button onClick={toggle}><i className="fa-solid fa-gear fa-xl"></i></button>
                     <button onClick={startGame}>{gameStart ? <i className="fa-solid fa-pause fa-xl"></i> : <i className="fa-solid fa-play fa-xl"></i>}</button>
                     <button onClick={resetGame}><i className="fa-solid fa-rotate-right fa-xl"></i></button>
                 </div>
-                <ClockPlayer2 timer={timerPlayer2} cambiarPlayer={cambiarPlayer} player={2} isPlaying={isPlaying} cantMovimientoPlayer2={cantMovimientoPlayer2} timerGlobal={timerGlobal}></ClockPlayer2>
+                <ClockPlayer2
+                    timer={timerPlayer2}
+                    cambiarPlayer={cambiarPlayer}
+                    player={2}
+                    isPlaying={isPlaying}
+                    cantMovimientoPlayer2={cantMovimientoPlayer2}
+                    timerGlobal={timerGlobal}>
+                </ClockPlayer2>
             </main>
         </>
     )
