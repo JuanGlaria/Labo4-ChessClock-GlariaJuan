@@ -111,13 +111,15 @@ export const Modal = ({ show, onCloseButtonClick, timeGameSettings }) => {
                 </header>
                 <main className='modal-main'>
                     <div className='div-modal-main modal-main-timeGame'>
-                        <label htmlFor="timePartida">Tiempo de la partida</label>
+                        <label htmlFor="timePartida">Tiempo de la partida:</label>
                         <input type="number" id="timePartida" maxLength={2} />
+                        <label htmlFor="timePartida" style={{marginLeft: '-10px'}}>Minutos.</label>
                     </div>
                     <div className='div-modal-main modal-main-incrementClock'>
                         <label htmlFor="partidaConIncremento">Reloj con incremento</label>
                         <input className="partidaConIncremento-input" type="checkbox" id="partidaConIncremento" onChange={habilitarValorIncremento} />
-                        <input className='valorAumentoInput' type="number" id='valorAumento' placeholder='Seg' disabled />
+                        <input className='valorAumentoInput' type="number" id='valorAumento' placeholder='00' disabled />
+                        <label htmlFor="partidaConIncremento">Segundos.</label>
 
                     </div>
                 </main>

@@ -16,7 +16,6 @@ export const Game = () => {
     const [timerPlayer2, setTimerPlayer2] = useState(0)
     const [timerGlobal, setTimerGlobal] = useState(0)
     const [valorIncrement, setValorIncrement] = useState(0)
-    // const [conIncremento, setConIncremento] = useState(0)
     const [cantMovimientoPlayer1, setCantMovimientoPlayer1] = useState(0)
     const [cantMovimientoPlayer2, setCantMovimientoPlayer2] = useState(0)
     const [isPlaying, setIsPlaying] = useState(1)
@@ -68,8 +67,8 @@ export const Game = () => {
                 imageAlt: 'Ganador Blancos',
                 timer: 5000,
             })
-        } 
-        if (ganador === 'negras'){
+        }
+        if (ganador === 'negras') {
             resetGame()
             Swal.fire({
                 title: 'Ganador Negras',
@@ -83,7 +82,7 @@ export const Game = () => {
     }
 
 
-    const timeGameSettings = (timeGameValue, conIncrementoValue, valorIncrementValue) => {
+    const timeGameSettings = (timeGameValue, valorIncrementValue) => {
         setTimerGlobal(timeGameValue * 60)
         setValorIncrement(valorIncrementValue)
         setTimerPlayer1(timeGameValue * 60)

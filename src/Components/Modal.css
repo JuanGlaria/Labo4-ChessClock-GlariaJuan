@@ -46,6 +46,7 @@
   border: none;
   bottom: none;
   outline: none;
+  margin-left: -10px;
 }
 
 .modal-main-incrementClock {
