@@ -16,7 +16,7 @@ export const Game = () => {
     const [timerPlayer2, setTimerPlayer2] = useState(0)
     const [timerGlobal, setTimerGlobal] = useState(0)
     const [valorIncrement, setValorIncrement] = useState(0)
-    const [conIncremento, setConIncremento] = useState(0)
+    // const [conIncremento, setConIncremento] = useState(0)
     const [cantMovimientoPlayer1, setCantMovimientoPlayer1] = useState(0)
     const [cantMovimientoPlayer2, setCantMovimientoPlayer2] = useState(0)
     const [isPlaying, setIsPlaying] = useState(1)
@@ -33,20 +33,21 @@ export const Game = () => {
                 intervalo = setInterval(() => {
                     setTimerPlayer1((prevTimerPlayer1) => prevTimerPlayer1 - 1)
                 }, 1000)
-            } else {
+            }
+            if (timerPlayer2 > 0 && isPlaying == 2) {
                 intervalo = setInterval(() => {
                     setTimerPlayer2((prevTimerPlayer2) => prevTimerPlayer2 - 1)
                 }, 1000)
             }
             if (timerPlayer2 == 0) {
                 return (
-                    Ganador('Blancas')
+                    Ganador('blancas')
 
                 )
             }
             if (timerPlayer1 == 0) {
                 return (
-                    Ganador('Negras')
+                    Ganador('negras')
                 )
             }
             return () => {
@@ -57,31 +58,33 @@ export const Game = () => {
 
 
     const Ganador = (ganador) => {
-        if (ganador === 'Blancas') {
+        if (ganador === 'blancas') {
+            resetGame()
             Swal.fire({
                 title: 'Ganador Blancos!',
                 imageUrl: '/img/winnerBlancas.jpg',
-                imageWidth: 200,
-                imageHeight: 400,
+                imageWidth: 300,
+                imageHeight: 350,
                 imageAlt: 'Ganador Blancos',
+                timer: 5000,
             })
-            setGameStart(false)
-        } else {
+        } 
+        if (ganador === 'negras'){
+            resetGame()
             Swal.fire({
                 title: 'Ganador Negras',
                 imageUrl: '/img/winnerNegras.jpg',
-                imageWidth: 200,
+                imageWidth: 400,
                 imageHeight: 400,
                 imageAlt: 'Ganador Negras',
+                timer: 5000,
             })
-            setGameStart(false)
         }
     }
 
 
     const timeGameSettings = (timeGameValue, conIncrementoValue, valorIncrementValue) => {
         setTimerGlobal(timeGameValue * 60)
-        setConIncremento(conIncrementoValue)
         setValorIncrement(valorIncrementValue)
         setTimerPlayer1(timeGameValue * 60)
         setTimerPlayer2(timeGameValue * 60)
@@ -93,10 +96,6 @@ export const Game = () => {
             setTimerPlayer2(10 * 60)
         }
         setGameStart((gameStart) => !gameStart)
-        console.log(gameStart);
-        if (cantMovimientoPlayer1 === 0) {
-            setCantMovimientoPlayer1(cantMovimientoPlayer1 + 1)
-        }
     }
 
     const resetGame = () => {
